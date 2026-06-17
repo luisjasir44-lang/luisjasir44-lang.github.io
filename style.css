@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InmoLuxury Rodríguez | Venta de Propiedades</title>
+    <style>
+        /* Estilos Globales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Desplazamiento suave */
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* Barra de Navegación */
+        header {
+            background-color: #1a252f;
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .logo span {
+            color: #fff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Hero Section / Banner principal */
+        .hero {
+            background: linear-gradient(rgba(26, 37, 47, 0.7), rgba(26, 37, 47, 0.7)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Secciones Generales */
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: #1a252f;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: #3498db;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Grid de Tarjetas de Propiedades */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        /* Tarjeta de Propiedad Individual */
+        .property-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .property-image {
+            position: relative;
+            height: 240px;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge-sale {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .property-price {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: #1a252f;
+            color: #3498db;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .property-content {
+            padding: 1.5rem;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a252f;
+        }
+
+        .property-location {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 1px solid #ecf0f1;
+            border-bottom: 1px solid #ecf0f1;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-view {
+            display: block;
+            text-align: center;
+            background-color: #3498db;
+            color: #fff;
+            padding: 0.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-view:hover {
+            background-color: #2980b9;
+        }
+
+        /* Sección de Contacto */
+        .contact-section {
+            background-color: #fff;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: #1a252f;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .info-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #555;
+        }
+
+        .info-item strong {
+            color: #1a252f;
+        }
+
+        /* Formulario de Contacto */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1a252f;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #3498db;
+        }
+
+        .btn-submit {
+            background-color: #1a252f;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #3498db;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a252f;
+            color: #7f8c8d;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegación -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">InmoLuxury <span>Rodríguez</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#propiedades">Propiedades</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero">
+        <h1>Encuentra tu Hogar Ideal</h1>
+        <p>Con el respaldo y la experiencia de InmoLuxury Rodríguez, aseguramos la mejor inversión para tu futuro.</p>
+    </section>
+
+    <!-- Contenedor Principal de Contenido -->
+    <main class="main-container">
+        
+        <!-- Sección Propiedades -->
+        <section id="propiedades">
+            <h2 class="section-title">Propiedades Destacadas</h2>
+
+            <div class="properties-grid">
+                
+                <!-- Propiedad 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=600&q=80" alt="Villa Moderna">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$450,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Villa Moderna con Piscina</h3>
+                        <div class="property-location">📍 Residencial El Sauce</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 4 Hab</div>
+                            <div class="feature-item">🛁 3 Baños</div>
+                            <div class="feature-item">📐 320 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+                <!-- Propiedad 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" alt="Apartamento Minimalista">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$185,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Apartamento Minimalista</h3>
+                        <div class="property-location">📍 Lomas del Guijarro y San Ignacio</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 2 Hab</div>
+                            <div class="feature-item">🛁 2 Baños</div>
+                            <div class="feature-item">📐 115 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+                <!-- Propiedad 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80" alt="Casa de Campo">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$295,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Casa de Campo Familiar</h3>
+                        <div class="property-location">📍 Residencial las Uvas</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 3 Hab</div>
+                            <div class="feature-item">🛁 2.5 Baños</div>
+                            <div class="feature-item">📐 240 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+                <!-- Propiedad 4 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Mansión Exclusiva">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$820,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Mansión de Lujo Vista Hermosa</h3>
+                        <div class="property-location">📍 El Hatillo</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 5 Hab</div>
+                            <div class="feature-item">🛁 6 Baños</div>
+                            <div class="feature-item">📐 510 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+                <!-- Propiedad 5 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=600&q=80" alt="Penthouse Ejecutivo">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$310,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Penthouse con Vista al Parque</h3>
+                        <div class="property-location">📍 Colonia Miraflores</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 3 Hab</div>
+                            <div class="feature-item">🛁 3 Baños</div>
+                            <div class="feature-item">📐 185 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+                <!-- Propiedad 6 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=600&q=80" alt="Chalet Moderno">
+                        <span class="badge-sale">En Venta</span>
+                        <span class="property-price">$245,000</span>
+                    </div>
+                    <div class="property-content">
+                        <h3 class="property-title">Chalet Moderno y Ecológico</h3>
+                        <div class="property-location">📍 Colonia las Colinas</div>
+                        <div class="property-features">
+                            <div class="feature-item">🛏️ 3 Hab</div>
+                            <div class="feature-item">🛁 2 Baños</div>
+                            <div class="feature-item">📐 160 m²</div>
+                        </div>
+                        <a href="#contacto" class="btn-view">Consultar</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sección de Contacto -->
+        <section id="contacto">
+            <h2 class="section-title">Contáctanos</h2>
+            
+            <div class="contact-section">
+                <!-- Información de contacto izquierda -->
+                <div class="contact-info">
+                    <h3>InmoLuxury Rodríguez</h3>
+                    <p>¿Tienes alguna duda sobre nuestras propiedades disponibles o te gustaría agendar una visita? Déjanos un mensaje y un asesor de nuestro equipo te responderá a la brevedad.</p>
+                    
+                    <div class="info-details">
+                        <div class="info-item">
+                            <span>📞</span>
+                            <div><strong>Teléfono:</strong> +504 9741-6627</div>
+                        </div>
+                        <div class="info-item">
+                            <span>✉️</span>
+                            <div><strong>Correo:</strong> contacto@inmoluxuryrodriguez.com</div>
+                        </div>
+                        <div class="info-item">
+                            <span>🏢</span>
+                            <div><strong>Oficina Central:</strong> Av. del Retorno, Edificio Mall Premier, Local 4B</div>
+                        </div>
+                        <div class="info-item">
+                            <span>🕒</span>
+                            <div><strong>Horarios:</strong> Lun - Vie: 8:00 AM - 6:00 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario derecho -->
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" placeholder="Ej. Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Teléfono de Contacto</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ej. 9999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensaje / Propiedad de Interés</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Cuéntanos en qué propiedad estás interesado..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer / Pie de página -->
+    <footer>
+        <p>&copy; 2026 InmoLuxury Rodríguez Real Estate. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
